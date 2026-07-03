@@ -1,0 +1,574 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>GDAI CUSAT — Core Team Recruitment 2026</title>
+  <meta name="description" content="Apply for a leadership role in the Game Development Club at CUSAT. Core Team Recruitment 2026.">
+  <meta name="theme-color" content="#0a0e1a">
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🎮</text></svg>">
+  <link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+  <div class="app-container">
+
+    <!-- ========== HEADER ========== -->
+    <header class="form-header">
+      <img src="/assets/logo.jpg" alt="GDAI CUSAT Logo" class="club-logo">
+      <h1>Core Team Recruitment 2026</h1>
+      <p>We're building the next core team for the Game Development Club! Apply for a leadership role below — you'll only see questions relevant to your chosen role. Applications close <strong>July 15, 2026</strong>.</p>
+    </header>
+
+    <!-- ========== PROGRESS ========== -->
+    <div class="progress-container">
+      <div class="progress-steps">
+        <span class="progress-step-label active">Basic Info</span>
+        <span class="progress-step-label">Role</span>
+        <span class="progress-step-label">Questions</span>
+        <span class="progress-step-label">Final</span>
+      </div>
+      <div class="progress-bar-track">
+        <div class="progress-bar-fill"></div>
+      </div>
+      <div class="progress-info">
+        <span class="progress-text">Step 1 of 4</span>
+      </div>
+    </div>
+
+    <!-- ========== FORM ========== -->
+    <form id="recruitment-form" novalidate>
+      <div class="form-card">
+
+        <!-- ===== SECTION 1: Basic Information ===== -->
+        <div id="section-basic" class="form-section active">
+          <h2 class="section-title">Basic Information</h2>
+          <p class="section-subtitle">Let's start with the essentials. Tell us about yourself.</p>
+
+          <div class="form-group" data-required="true">
+            <label class="form-label" for="full_name">Full Name <span class="required">*</span></label>
+            <input type="text" id="full_name" class="form-input" placeholder="e.g. Aarav Menon" autocomplete="name">
+            <div class="error-message">Please enter your full name.</div>
+          </div>
+
+          <div class="form-group" data-required="true">
+            <label class="form-label" for="email">Email Address <span class="required">*</span></label>
+            <input type="email" id="email" class="form-input" placeholder="you@example.com" autocomplete="email">
+            <div class="error-message">Please enter a valid email address.</div>
+          </div>
+
+          <div class="form-group" data-required="true">
+            <label class="form-label" for="phone">Phone / WhatsApp Number <span class="required">*</span></label>
+            <input type="tel" id="phone" class="form-input" placeholder="+91 98765 43210" autocomplete="tel">
+            <div class="error-message">Please enter your phone number.</div>
+          </div>
+
+          <div class="form-group">
+
+          <div class="form-group" data-required="true">
+            <label class="form-label">Year of Study / Semester <span class="required">*</span></label>
+            <div class="radio-group" data-required="true">
+              <label class="radio-option"><input type="radio" name="year_of_study" value="1st Year"><span class="radio-label">1st Year</span></label>
+              <label class="radio-option"><input type="radio" name="year_of_study" value="2nd Year"><span class="radio-label">2nd Year</span></label>
+              <label class="radio-option"><input type="radio" name="year_of_study" value="3rd Year"><span class="radio-label">3rd Year</span></label>
+              <label class="radio-option"><input type="radio" name="year_of_study" value="4th Year"><span class="radio-label">4th Year</span></label>
+              <label class="radio-option"><input type="radio" name="year_of_study" value="Other"><span class="radio-label">Other</span></label>
+            </div>
+            <div class="error-message">Please select your year of study.</div>
+          </div>
+
+          <div class="form-group" data-required="true">
+            <label class="form-label" for="branch">Branch / Major <span class="required">*</span></label>
+            <input type="text" id="branch" class="form-input" placeholder="e.g. Computer Science, Electronics">
+            <div class="error-message">Please enter your branch or major.</div>
+          </div>
+
+          <div class="form-group">
+            <label class="form-label" for="previous_club_experience">Have you been part of any club or society before? If yes, mention role. <span class="optional">(optional)</span></label>
+            <textarea id="previous_club_experience" class="form-textarea" placeholder="e.g. Design Lead at Photography Club for 1 year..."></textarea>
+          </div>
+
+          <div class="form-group">
+            <label class="form-label" for="portfolio_link">Portfolio / GitHub / itch.io / Behance link <span class="optional">(optional)</span></label>
+            <input type="url" id="portfolio_link" class="form-input" placeholder="https://github.com/yourusername">
+          </div>
+
+          <div class="form-actions">
+            <div></div>
+            <button type="button" class="btn btn-primary btn-next"><span class="btn-text">Continue</span> →</button>
+          </div>
+        </div>
+
+        <!-- ===== SECTION 2: Role Selection ===== -->
+        <div id="section-role-select" class="form-section">
+          <h2 class="section-title">Choose Your Role</h2>
+          <p class="section-subtitle">Select the core team role you're most interested in. You'll be asked questions specific to this role.</p>
+
+          <div class="form-group" data-required="true">
+            <div class="role-grid" data-required="true">
+
+              <label class="role-card">
+                <input type="radio" name="role_applied" value="Vice President">
+                <div class="role-card-icon">🤝</div>
+                <div class="role-card-info">
+                  <div class="role-card-title">Vice President</div>
+                  <div class="role-card-desc">Operations & coordination</div>
+                </div>
+              </label>
+              <label class="role-card">
+                <input type="radio" name="role_applied" value="Technical Lead (Programming)">
+                <div class="role-card-icon">💻</div>
+                <div class="role-card-info">
+                  <div class="role-card-title">Technical Lead</div>
+                  <div class="role-card-desc">Programming & engines</div>
+                </div>
+              </label>
+              <label class="role-card">
+                <input type="radio" name="role_applied" value="Art & Design Lead">
+                <div class="role-card-icon">🎨</div>
+                <div class="role-card-info">
+                  <div class="role-card-title">Art & Design Lead</div>
+                  <div class="role-card-desc">Visual direction & assets</div>
+                </div>
+              </label>
+              <label class="role-card">
+                <input type="radio" name="role_applied" value="Game Design Lead">
+                <div class="role-card-icon">🎲</div>
+                <div class="role-card-info">
+                  <div class="role-card-title">Game Design Lead</div>
+                  <div class="role-card-desc">Mechanics & levels</div>
+                </div>
+              </label>
+              <label class="role-card">
+                <input type="radio" name="role_applied" value="Marketing & Social Media Lead">
+                <div class="role-card-icon">📣</div>
+                <div class="role-card-info">
+                  <div class="role-card-title">Marketing Lead</div>
+                  <div class="role-card-desc">Social media & outreach</div>
+                </div>
+              </label>
+              <label class="role-card">
+                <input type="radio" name="role_applied" value="Event Coordinator">
+                <div class="role-card-icon">📋</div>
+                <div class="role-card-info">
+                  <div class="role-card-title">Event Coordinator</div>
+                  <div class="role-card-desc">Logistics & planning</div>
+                </div>
+              </label>
+              <label class="role-card">
+                <input type="radio" name="role_applied" value="Outreach & Community Manager">
+                <div class="role-card-icon">🌐</div>
+                <div class="role-card-info">
+                  <div class="role-card-title">Community Manager</div>
+                  <div class="role-card-desc">Partnerships & relations</div>
+                </div>
+              </label>
+            </div>
+            <div class="error-message">Please select a role to continue.</div>
+          </div>
+
+          <div class="form-actions">
+            <button type="button" class="btn btn-secondary btn-prev">← Back</button>
+            <button type="button" class="btn btn-primary btn-next"><span class="btn-text">Continue</span> →</button>
+          </div>
+        </div>
+
+        <!-- ===== SECTION 4: Vice President ===== -->
+        <div id="section-vp" class="form-section">
+          <h2 class="section-title">Vice President</h2>
+          <div class="role-summary">Supports the President, manages internal operations, steps in as lead when needed, coordinates between sub-teams.</div>
+
+          <div class="form-group" data-required="true">
+            <label class="form-label" for="vp_coordination">What does good internal coordination between sub-teams look like to you? <span class="required">*</span></label>
+            <textarea id="vp_coordination" class="form-textarea" placeholder="Share your thoughts..."></textarea>
+            <div class="error-message">This field is required.</div>
+          </div>
+
+          <div class="form-group" data-required="true">
+            <label class="form-label" for="vp_multitask">Describe your experience managing multiple people/tasks at once. <span class="required">*</span></label>
+            <textarea id="vp_multitask" class="form-textarea" placeholder="Tell us about your experience..."></textarea>
+            <div class="error-message">This field is required.</div>
+          </div>
+
+          <div class="form-group" data-required="true">
+            <label class="form-label">Are you comfortable stepping in as club lead if the President is unavailable? <span class="required">*</span></label>
+            <div class="radio-group" data-required="true">
+              <label class="radio-option"><input type="radio" name="vp_stepin" value="Yes"><span class="radio-label">Yes</span></label>
+              <label class="radio-option"><input type="radio" name="vp_stepin" value="No"><span class="radio-label">No</span></label>
+            </div>
+            <div class="error-message">Please select an option.</div>
+          </div>
+
+          <div class="form-group" data-required="true">
+            <label class="form-label">Weekly hours you can commit <span class="required">*</span></label>
+            <div class="radio-group" data-required="true">
+              <label class="radio-option"><input type="radio" name="vp_hours" value="2-4 hrs"><span class="radio-label">2–4 hrs</span></label>
+              <label class="radio-option"><input type="radio" name="vp_hours" value="5-7 hrs"><span class="radio-label">5–7 hrs</span></label>
+              <label class="radio-option"><input type="radio" name="vp_hours" value="8+ hrs"><span class="radio-label">8+ hrs</span></label>
+            </div>
+            <div class="error-message">Please select an option.</div>
+          </div>
+
+          <div class="form-actions">
+            <button type="button" class="btn btn-secondary btn-prev">← Back</button>
+            <button type="button" class="btn btn-primary btn-next"><span class="btn-text">Continue</span> →</button>
+          </div>
+        </div>
+
+        <!-- ===== SECTION 5: Technical Lead ===== -->
+        <div id="section-tech" class="form-section">
+          <h2 class="section-title">Technical Lead (Programming)</h2>
+          <div class="role-summary">Oversees game jams and coding workshops, sets up engine/tooling standards, mentors members on programming.</div>
+
+          <div class="form-group" data-required="true">
+            <label class="form-label">Which game engines/languages are you proficient in? <span class="required">*</span></label>
+            <div class="checkbox-group" data-required="true">
+              <label class="checkbox-option"><input type="checkbox" name="tech_engines" value="Unity (C#)"><span class="checkbox-label">Unity (C#)</span></label>
+              <label class="checkbox-option"><input type="checkbox" name="tech_engines" value="Unreal (C++/Blueprints)"><span class="checkbox-label">Unreal (C++/Blueprints)</span></label>
+              <label class="checkbox-option"><input type="checkbox" name="tech_engines" value="Godot (GDScript)"><span class="checkbox-label">Godot (GDScript)</span></label>
+              <label class="checkbox-option"><input type="checkbox" name="tech_engines" value="Custom engine"><span class="checkbox-label">Custom engine</span></label>
+              <label class="checkbox-option"><input type="checkbox" name="tech_engines" value="Other"><span class="checkbox-label">Other</span></label>
+            </div>
+            <div class="error-message">Please select at least one option.</div>
+          </div>
+
+          <div class="form-group" data-required="true">
+            <label class="form-label" for="tech_project_link">Link to a project, repo, or game you've built (solo or team) <span class="required">*</span></label>
+            <input type="url" id="tech_project_link" class="form-input" placeholder="https://github.com/you/project">
+            <div class="error-message">Please provide a project link.</div>
+          </div>
+
+          <div class="form-group" data-required="true">
+            <label class="form-label" for="tech_workshop">How would you run a beginner-friendly coding workshop for new members? <span class="required">*</span></label>
+            <textarea id="tech_workshop" class="form-textarea" placeholder="Describe your workshop plan..."></textarea>
+            <div class="error-message">This field is required.</div>
+          </div>
+
+          <div class="form-group" data-required="true">
+            <label class="form-label">Comfort level mentoring others in programming <span class="required">*</span></label>
+            <div class="scale-group">
+              <span class="scale-label">Low</span>
+              <div id="tech_mentoring_scale" class="scale-options" data-required="true">
+                <div class="scale-option" data-value="1">1</div>
+                <div class="scale-option" data-value="2">2</div>
+                <div class="scale-option" data-value="3">3</div>
+                <div class="scale-option" data-value="4">4</div>
+                <div class="scale-option" data-value="5">5</div>
+              </div>
+              <span class="scale-label">High</span>
+            </div>
+            <div class="error-message">Please select a comfort level.</div>
+          </div>
+
+          <div class="form-group" data-required="true">
+            <label class="form-label">Weekly hours you can commit <span class="required">*</span></label>
+            <div class="radio-group" data-required="true">
+              <label class="radio-option"><input type="radio" name="tech_hours" value="2-4 hrs"><span class="radio-label">2–4 hrs</span></label>
+              <label class="radio-option"><input type="radio" name="tech_hours" value="5-7 hrs"><span class="radio-label">5–7 hrs</span></label>
+              <label class="radio-option"><input type="radio" name="tech_hours" value="8+ hrs"><span class="radio-label">8+ hrs</span></label>
+            </div>
+            <div class="error-message">Please select an option.</div>
+          </div>
+
+          <div class="form-actions">
+            <button type="button" class="btn btn-secondary btn-prev">← Back</button>
+            <button type="button" class="btn btn-primary btn-next"><span class="btn-text">Continue</span> →</button>
+          </div>
+        </div>
+
+        <!-- ===== SECTION 6: Art & Design Lead ===== -->
+        <div id="section-art" class="form-section">
+          <h2 class="section-title">Art & Design Lead</h2>
+          <div class="role-summary">Leads visual direction for club projects, organizes art/animation workshops, manages asset pipelines and portfolio reviews.</div>
+
+          <div class="form-group" data-required="true">
+            <label class="form-label">Which tools do you work in? <span class="required">*</span></label>
+            <div class="checkbox-group" data-required="true">
+              <label class="checkbox-option"><input type="checkbox" name="art_tools" value="Photoshop"><span class="checkbox-label">Photoshop</span></label>
+              <label class="checkbox-option"><input type="checkbox" name="art_tools" value="Procreate"><span class="checkbox-label">Procreate</span></label>
+              <label class="checkbox-option"><input type="checkbox" name="art_tools" value="Aseprite"><span class="checkbox-label">Aseprite</span></label>
+              <label class="checkbox-option"><input type="checkbox" name="art_tools" value="Blender"><span class="checkbox-label">Blender</span></label>
+              <label class="checkbox-option"><input type="checkbox" name="art_tools" value="Substance Painter"><span class="checkbox-label">Substance Painter</span></label>
+              <label class="checkbox-option"><input type="checkbox" name="art_tools" value="Other"><span class="checkbox-label">Other</span></label>
+            </div>
+            <div class="error-message">Please select at least one tool.</div>
+          </div>
+
+          <div class="form-group" data-required="true">
+            <label class="form-label" for="art_portfolio">Link to your art/animation portfolio <span class="required">*</span></label>
+            <input type="url" id="art_portfolio" class="form-input" placeholder="https://behance.net/yourprofile">
+            <div class="error-message">Please provide your portfolio link.</div>
+          </div>
+
+          <div class="form-group" data-required="true">
+            <label class="form-label" for="art_styles">What art style(s) are you strongest in? (pixel, 3D, concept art, UI, etc.) <span class="required">*</span></label>
+            <input type="text" id="art_styles" class="form-input" placeholder="e.g. Pixel art, 3D low-poly, UI/UX">
+            <div class="error-message">Please describe your art styles.</div>
+          </div>
+
+          <div class="form-group" data-required="true">
+            <label class="form-label" for="art_consistency">How would you keep visual consistency across a team project with multiple artists? <span class="required">*</span></label>
+            <textarea id="art_consistency" class="form-textarea" placeholder="Describe your approach..."></textarea>
+            <div class="error-message">This field is required.</div>
+          </div>
+
+          <div class="form-group" data-required="true">
+            <label class="form-label">Weekly hours you can commit <span class="required">*</span></label>
+            <div class="radio-group" data-required="true">
+              <label class="radio-option"><input type="radio" name="art_hours" value="2-4 hrs"><span class="radio-label">2–4 hrs</span></label>
+              <label class="radio-option"><input type="radio" name="art_hours" value="5-7 hrs"><span class="radio-label">5–7 hrs</span></label>
+              <label class="radio-option"><input type="radio" name="art_hours" value="8+ hrs"><span class="radio-label">8+ hrs</span></label>
+            </div>
+            <div class="error-message">Please select an option.</div>
+          </div>
+
+          <div class="form-actions">
+            <button type="button" class="btn btn-secondary btn-prev">← Back</button>
+            <button type="button" class="btn btn-primary btn-next"><span class="btn-text">Continue</span> →</button>
+          </div>
+        </div>
+
+        <!-- ===== SECTION 7: Game Design Lead ===== -->
+        <div id="section-gamedesign" class="form-section">
+          <h2 class="section-title">Game Design Lead</h2>
+          <div class="role-summary">Guides mechanics, level, and narrative design for club projects; runs game-design brainstorm sessions and playtests.</div>
+
+          <div class="form-group" data-required="true">
+            <label class="form-label" for="gd_admired_game">Name a game (any game) with design you admire, and explain why in 2-3 sentences. <span class="required">*</span></label>
+            <textarea id="gd_admired_game" class="form-textarea" placeholder="e.g. Celeste — the difficulty curve is perfectly tuned..."></textarea>
+            <div class="error-message">This field is required.</div>
+          </div>
+
+          <div class="form-group" data-required="true">
+            <label class="form-label" for="gd_design_exp">Have you designed a game mechanic, level, or story before? Describe it. <span class="required">*</span></label>
+            <textarea id="gd_design_exp" class="form-textarea" placeholder="Tell us about your design work..."></textarea>
+            <div class="error-message">This field is required.</div>
+          </div>
+
+          <div class="form-group" data-required="true">
+            <label class="form-label" for="gd_playtest">How would you run a productive playtest session and turn feedback into action? <span class="required">*</span></label>
+            <textarea id="gd_playtest" class="form-textarea" placeholder="Describe your process..."></textarea>
+            <div class="error-message">This field is required.</div>
+          </div>
+
+          <div class="form-group" data-required="true">
+            <label class="form-label">Weekly hours you can commit <span class="required">*</span></label>
+            <div class="radio-group" data-required="true">
+              <label class="radio-option"><input type="radio" name="gd_hours" value="2-4 hrs"><span class="radio-label">2–4 hrs</span></label>
+              <label class="radio-option"><input type="radio" name="gd_hours" value="5-7 hrs"><span class="radio-label">5–7 hrs</span></label>
+              <label class="radio-option"><input type="radio" name="gd_hours" value="8+ hrs"><span class="radio-label">8+ hrs</span></label>
+            </div>
+            <div class="error-message">Please select an option.</div>
+          </div>
+
+          <div class="form-actions">
+            <button type="button" class="btn btn-secondary btn-prev">← Back</button>
+            <button type="button" class="btn btn-primary btn-next"><span class="btn-text">Continue</span> →</button>
+          </div>
+        </div>
+
+        <!-- ===== SECTION 8: Marketing & Social Media Lead ===== -->
+        <div id="section-marketing" class="form-section">
+          <h2 class="section-title">Marketing & Social Media Lead</h2>
+          <div class="role-summary">Runs Instagram/LinkedIn presence, designs posters, writes event copy, tracks engagement metrics.</div>
+
+          <div class="form-group">
+            <label class="form-label" for="mkt_campaigns">Link to any social pages/campaigns you've managed (personal or otherwise) <span class="optional">(optional)</span></label>
+            <input type="url" id="mkt_campaigns" class="form-input" placeholder="https://instagram.com/yourpage">
+          </div>
+
+          <div class="form-group" data-required="true">
+            <label class="form-label">What platforms are you most comfortable creating content for? <span class="required">*</span></label>
+            <div class="checkbox-group" data-required="true">
+              <label class="checkbox-option"><input type="checkbox" name="mkt_platforms" value="Instagram"><span class="checkbox-label">Instagram</span></label>
+              <label class="checkbox-option"><input type="checkbox" name="mkt_platforms" value="LinkedIn"><span class="checkbox-label">LinkedIn</span></label>
+              <label class="checkbox-option"><input type="checkbox" name="mkt_platforms" value="YouTube"><span class="checkbox-label">YouTube</span></label>
+              <label class="checkbox-option"><input type="checkbox" name="mkt_platforms" value="Twitter/X"><span class="checkbox-label">Twitter/X</span></label>
+              <label class="checkbox-option"><input type="checkbox" name="mkt_platforms" value="Other"><span class="checkbox-label">Other</span></label>
+            </div>
+            <div class="error-message">Please select at least one platform.</div>
+          </div>
+
+          <div class="form-group" data-required="true">
+            <label class="form-label" for="mkt_caption">Pitch a one-line caption + hashtag idea for our upcoming game jam announcement <span class="required">*</span></label>
+            <input type="text" id="mkt_caption" class="form-input" placeholder="e.g. Ready, set, game! 🎮 #GDAIJam2026">
+            <div class="error-message">Please pitch a caption.</div>
+          </div>
+
+          <div class="form-group" data-required="true">
+            <label class="form-label">Are you comfortable with basic design tools (Canva, Photoshop, etc.)? <span class="required">*</span></label>
+            <div class="radio-group" data-required="true">
+              <label class="radio-option"><input type="radio" name="mkt_design_tools" value="Yes"><span class="radio-label">Yes</span></label>
+              <label class="radio-option"><input type="radio" name="mkt_design_tools" value="A little"><span class="radio-label">A little</span></label>
+              <label class="radio-option"><input type="radio" name="mkt_design_tools" value="No"><span class="radio-label">No</span></label>
+            </div>
+            <div class="error-message">Please select an option.</div>
+          </div>
+
+          <div class="form-group" data-required="true">
+            <label class="form-label">Weekly hours you can commit <span class="required">*</span></label>
+            <div class="radio-group" data-required="true">
+              <label class="radio-option"><input type="radio" name="mkt_hours" value="2-4 hrs"><span class="radio-label">2–4 hrs</span></label>
+              <label class="radio-option"><input type="radio" name="mkt_hours" value="5-7 hrs"><span class="radio-label">5–7 hrs</span></label>
+              <label class="radio-option"><input type="radio" name="mkt_hours" value="8+ hrs"><span class="radio-label">8+ hrs</span></label>
+            </div>
+            <div class="error-message">Please select an option.</div>
+          </div>
+
+          <div class="form-actions">
+            <button type="button" class="btn btn-secondary btn-prev">← Back</button>
+            <button type="button" class="btn btn-primary btn-next"><span class="btn-text">Continue</span> →</button>
+          </div>
+        </div>
+
+        <!-- ===== SECTION 9: Event Coordinator ===== -->
+        <div id="section-event" class="form-section">
+          <h2 class="section-title">Event Coordinator</h2>
+          <div class="role-summary">Plans logistics for all events: venue booking, schedules, judges, prizes, equipment, and on-day execution.</div>
+
+          <div class="form-group" data-required="true">
+            <label class="form-label" for="evt_experience">Have you organized or helped run an event before? Describe your role. <span class="required">*</span></label>
+            <textarea id="evt_experience" class="form-textarea" placeholder="Tell us about your event experience..."></textarea>
+            <div class="error-message">This field is required.</div>
+          </div>
+
+          <div class="form-group" data-required="true">
+            <label class="form-label" for="evt_logistics">How would you handle a last-minute logistics problem on event day (e.g., venue double-booked)? <span class="required">*</span></label>
+            <textarea id="evt_logistics" class="form-textarea" placeholder="Describe your problem-solving approach..."></textarea>
+            <div class="error-message">This field is required.</div>
+          </div>
+
+          <div class="form-group" data-required="true">
+            <label class="form-label">Are you comfortable coordinating with college administration for approvals/bookings? <span class="required">*</span></label>
+            <div class="radio-group" data-required="true">
+              <label class="radio-option"><input type="radio" name="evt_admin" value="Yes"><span class="radio-label">Yes</span></label>
+              <label class="radio-option"><input type="radio" name="evt_admin" value="Somewhat"><span class="radio-label">Somewhat</span></label>
+              <label class="radio-option"><input type="radio" name="evt_admin" value="No"><span class="radio-label">No</span></label>
+            </div>
+            <div class="error-message">Please select an option.</div>
+          </div>
+
+          <div class="form-group" data-required="true">
+            <label class="form-label">Weekly hours you can commit <span class="required">*</span></label>
+            <div class="radio-group" data-required="true">
+              <label class="radio-option"><input type="radio" name="evt_hours" value="2-4 hrs"><span class="radio-label">2–4 hrs</span></label>
+              <label class="radio-option"><input type="radio" name="evt_hours" value="5-7 hrs"><span class="radio-label">5–7 hrs</span></label>
+              <label class="radio-option"><input type="radio" name="evt_hours" value="8+ hrs"><span class="radio-label">8+ hrs</span></label>
+            </div>
+            <div class="error-message">Please select an option.</div>
+          </div>
+
+          <div class="form-actions">
+            <button type="button" class="btn btn-secondary btn-prev">← Back</button>
+            <button type="button" class="btn btn-primary btn-next"><span class="btn-text">Continue</span> →</button>
+          </div>
+        </div>
+
+        <!-- ===== SECTION 10: Outreach & Community Manager ===== -->
+        <div id="section-outreach" class="form-section">
+          <h2 class="section-title">Outreach & Community Manager</h2>
+          <div class="role-summary">Manages online communities, onboards new members, builds relationships with other clubs, alumni, and studios.</div>
+
+          <div class="form-group" data-required="true">
+            <label class="form-label">Have you managed an online community before? <span class="required">*</span></label>
+            <div class="radio-group" data-required="true">
+              <label class="radio-option"><input type="radio" name="out_community_exp" value="Yes"><span class="radio-label">Yes</span></label>
+              <label class="radio-option"><input type="radio" name="out_community_exp" value="No"><span class="radio-label">No</span></label>
+            </div>
+            <div class="error-message">Please select an option.</div>
+          </div>
+
+          <div class="form-group" data-required="true">
+            <label class="form-label" for="out_welcome">How would you make a new member feel welcomed in the first week of joining? <span class="required">*</span></label>
+            <textarea id="out_welcome" class="form-textarea" placeholder="Describe your onboarding approach..."></textarea>
+            <div class="error-message">This field is required.</div>
+          </div>
+
+          <div class="form-group">
+            <label class="form-label" for="out_contacts">Do you have any existing contacts with other clubs, alumni, or studios that could benefit the club? <span class="optional">(optional)</span></label>
+            <textarea id="out_contacts" class="form-textarea" placeholder="List any relevant connections..."></textarea>
+          </div>
+
+          <div class="form-group" data-required="true">
+            <label class="form-label">Weekly hours you can commit <span class="required">*</span></label>
+            <div class="radio-group" data-required="true">
+              <label class="radio-option"><input type="radio" name="out_hours" value="2-4 hrs"><span class="radio-label">2–4 hrs</span></label>
+              <label class="radio-option"><input type="radio" name="out_hours" value="5-7 hrs"><span class="radio-label">5–7 hrs</span></label>
+              <label class="radio-option"><input type="radio" name="out_hours" value="8+ hrs"><span class="radio-label">8+ hrs</span></label>
+            </div>
+            <div class="error-message">Please select an option.</div>
+          </div>
+
+          <div class="form-actions">
+            <button type="button" class="btn btn-secondary btn-prev">← Back</button>
+            <button type="button" class="btn btn-primary btn-next"><span class="btn-text">Continue</span> →</button>
+          </div>
+        </div>
+
+        <!-- ===== SECTION 11: Final Questions ===== -->
+        <div id="section-final" class="form-section">
+          <h2 class="section-title">Final Questions</h2>
+          <p class="section-subtitle">Almost there! Just a few more things before you submit.</p>
+
+          <div class="form-group">
+            <label class="form-label">Is there a second role you'd be open to if your first choice isn't available? <span class="optional">(optional)</span></label>
+            <div class="radio-group">
+
+              <label class="radio-option"><input type="radio" name="second_role_choice" value="Vice President"><span class="radio-label">Vice President</span></label>
+              <label class="radio-option"><input type="radio" name="second_role_choice" value="Technical Lead (Programming)"><span class="radio-label">Technical Lead (Programming)</span></label>
+              <label class="radio-option"><input type="radio" name="second_role_choice" value="Art & Design Lead"><span class="radio-label">Art & Design Lead</span></label>
+              <label class="radio-option"><input type="radio" name="second_role_choice" value="Game Design Lead"><span class="radio-label">Game Design Lead</span></label>
+              <label class="radio-option"><input type="radio" name="second_role_choice" value="Marketing & Social Media Lead"><span class="radio-label">Marketing & Social Media Lead</span></label>
+              <label class="radio-option"><input type="radio" name="second_role_choice" value="Event Coordinator"><span class="radio-label">Event Coordinator</span></label>
+              <label class="radio-option"><input type="radio" name="second_role_choice" value="Outreach & Community Manager"><span class="radio-label">Outreach & Community Manager</span></label>
+              <label class="radio-option"><input type="radio" name="second_role_choice" value="No, only my first choice"><span class="radio-label">No, only my first choice</span></label>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label class="form-label" for="anything_else">Anything else you'd like the panel to know? <span class="optional">(optional)</span></label>
+            <textarea id="anything_else" class="form-textarea" placeholder="Share anything else you'd like us to know..."></textarea>
+          </div>
+
+          <div class="form-group" data-required="true">
+            <label class="form-label">Are you available for a short 10-15 min interview in the coming week? <span class="required">*</span></label>
+            <div class="radio-group" data-required="true">
+              <label class="radio-option"><input type="radio" name="available_for_interview" value="Yes"><span class="radio-label">Yes</span></label>
+              <label class="radio-option"><input type="radio" name="available_for_interview" value="No"><span class="radio-label">No</span></label>
+              <label class="radio-option"><input type="radio" name="available_for_interview" value="Depends on timing"><span class="radio-label">Depends on timing</span></label>
+            </div>
+            <div class="error-message">Please select an option.</div>
+          </div>
+
+          <div class="form-actions">
+            <button type="button" class="btn btn-secondary btn-prev">← Back</button>
+            <button type="button" class="btn btn-primary btn-submit"><span class="btn-text">Submit Application</span> 🚀</button>
+          </div>
+        </div>
+
+      </div><!-- /.form-card -->
+    </form>
+
+    <!-- ========== SUCCESS SCREEN ========== -->
+    <div class="success-screen">
+      <div class="success-icon">🎉</div>
+      <h2>Application Submitted!</h2>
+      <p>Thanks for applying to the Game Development Club core team! We'll review applications and reach out for a short interview within 5 days. Questions? Email <strong>gdai@cusat.ac.in</strong>.</p>
+    </div>
+
+    <!-- ========== DUPLICATE SCREEN ========== -->
+    <div class="duplicate-screen">
+      <div class="duplicate-icon">⚠️</div>
+      <h2>Already Applied</h2>
+      <p>An application with this email address already exists. Each person may only submit one application. If you believe this is an error, email us at <strong>gdai@cusat.ac.in</strong>.</p>
+    </div>
+
+    <!-- ========== FOOTER ========== -->
+    <footer class="form-footer">
+      <p>GDAI CUSAT © 2026 · Game Development Club</p>
+    </footer>
+
+  </div><!-- /.app-container -->
+
+  <script src="/js/form.js"></script>
+</body>
+</html>

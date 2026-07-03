@@ -1,0 +1,21 @@
+{
+  "name": "gdai-cusat-recruitment",
+  "version": "1.0.0",
+  "description": "GDAI CUSAT Game Development Club — Core Team Recruitment Form",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js",
+    "dev": "node --watch server.js"
+  },
+  "dependencies": {
+    "express": "^4.21.0",
+    "bcryptjs": "^2.4.3",
+    "express-session": "^1.18.1",
+    "express-rate-limit": "^7.4.1",
+    "helmet": "^8.0.0",
+    "dotenv": "^16.4.5"
+  },
+  "engines": {
+    "node": ">=18.0.0"
+  }
+}

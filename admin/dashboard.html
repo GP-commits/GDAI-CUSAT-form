@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Admin Dashboard — GDAI CUSAT</title>
+  <meta name="theme-color" content="#0a0e1a">
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>📊</text></svg>">
+  <link rel="stylesheet" href="/css/style.css">
+  <link rel="stylesheet" href="/admin/css/admin.css">
+</head>
+<body>
+  <div class="app-container">
+    <div class="dashboard-container">
+
+      <!-- ========== NAVIGATION ========== -->
+      <nav class="admin-nav">
+        <div style="display: flex; align-items: center; gap: 0.8rem;">
+          <img src="/assets/logo.jpg" alt="GDAI CUSAT Logo" style="height: 36px; width: auto; border-radius: 4px; box-shadow: 0 0 10px rgba(255, 255, 255, 0.1);">
+          <h2 style="margin: 0; font-size: 1.3rem; font-family: 'Outfit'; font-weight: 700;">GDAI CUSAT Admin</h2>
+        </div>
+        <div class="nav-actions">
+          <button id="btn-export" class="btn btn-secondary" style="padding: 0.6rem 1.2rem; font-size: 0.82rem;">
+            <span>📥</span> Export CSV
+          </button>
+          <button id="btn-logout" class="btn btn-secondary" style="padding: 0.6rem 1.2rem; font-size: 0.82rem; border-color: rgba(239, 68, 68, 0.2); color: #fca5a5;">
+            Logout
+          </button>
+        </div>
+      </nav>
+
+      <!-- ========== STATISTICS ========== -->
+      <div class="stats-grid">
+        <div class="stat-card">
+          <div class="stat-label">Total Applications</div>
+          <div class="stat-value" id="stat-total">-</div>
+          <div class="stat-desc" id="stat-latest">No applications yet</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-label">Top Choice Role</div>
+          <div class="stat-value" id="stat-top-role" style="font-size: 1.2rem; padding: 0.5rem 0;">-</div>
+          <div class="stat-desc" id="stat-top-count">0 applications</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-label">1st Year Candidates</div>
+          <div class="stat-value" id="stat-first-years">-</div>
+          <div class="stat-desc">Fresh talent percentage</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-label">Interview Ready</div>
+          <div class="stat-value" id="stat-interview">-</div>
+          <div class="stat-desc">Available for interview</div>
+        </div>
+      </div>
+
+      <!-- ========== CONTROL PANEL ========== -->
+      <div class="control-panel">
+        <div class="form-group" style="margin-bottom: 0;">
+          <label class="form-label" for="search-input">Search Candidates</label>
+          <input type="text" id="search-input" class="form-input" placeholder="Search by name, email, or branch...">
+        </div>
+        <div class="form-group" style="margin-bottom: 0;">
+          <label class="form-label" for="role-filter">Filter by Role</label>
+          <select id="role-filter" class="form-select" style="min-width: 200px;">
+            <option value="all">All Roles</option>
+            <option value="President / Club Lead">👑 President / Club Lead</option>
+            <option value="Vice President">🤝 Vice President</option>
+            <option value="Technical Lead (Programming)">💻 Technical Lead</option>
+            <option value="Art & Design Lead">🎨 Art & Design Lead</option>
+            <option value="Game Design Lead">🎲 Game Design Lead</option>
+            <option value="Marketing & Social Media Lead">📣 Marketing Lead</option>
+            <option value="Event Coordinator">📋 Event Coordinator</option>
+            <option value="Outreach & Community Manager">🌐 Community Manager</option>
+          </select>
+        </div>
+        <div class="form-group" style="margin-bottom: 0;">
+          <label class="form-label" for="sort-select">Sort By</label>
+          <select id="sort-select" class="form-select" style="min-width: 150px;">
+            <option value="newest">Newest First</option>
+            <option value="oldest">Oldest First</option>
+          </select>
+        </div>
+      </div>
+
+      <!-- ========== SUBMISSIONS ========== -->
+      <div class="submissions-wrapper">
+        <div class="submissions-header">
+          <h3>Candidates</h3>
+          <span class="submissions-count" id="list-count">0 Submissions</span>
+        </div>
+
+        <div class="submissions-list" id="submissions-list">
+          <!-- Submission cards will be injected here -->
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- ========== DETAIL MODAL ========== -->
+  <div class="modal-overlay" id="detail-modal">
+    <div class="modal-content">
+      <button class="modal-close" id="modal-close">&times;</button>
+      <div id="modal-body-content">
+        <!-- Rendered dynamically -->
+      </div>
+    </div>
+  </div>
+
+  <script src="/admin/js/admin.js"></script>
+</body>
+</html>

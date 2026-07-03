@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Admin Login — GDAI CUSAT</title>
+  <meta name="theme-color" content="#0a0e1a">
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🔒</text></svg>">
+  <link rel="stylesheet" href="/css/style.css">
+  <style>
+    /* Custom modifications for login view */
+    .login-container {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      min-height: 100vh;
+      width: 100%;
+      padding: 1rem;
+    }
+    .login-card {
+      width: 100%;
+      max-width: 420px;
+      padding: 3rem 2.5rem;
+    }
+    .login-logo {
+      font-size: 3rem;
+      margin-bottom: 1rem;
+      text-align: center;
+      animation: pulse-dot 2s ease-in-out infinite;
+    }
+    .login-header {
+      text-align: center;
+      margin-bottom: 2rem;
+    }
+    .login-header h2 {
+      font-family: 'Outfit', sans-serif;
+      font-size: 1.8rem;
+      font-weight: 700;
+      background: linear-gradient(135deg, #f0f0f5 0%, #c084fc 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      margin-bottom: 0.5rem;
+    }
+    .login-header p {
+      color: var(--text-secondary);
+      font-size: 0.88rem;
+    }
+    /* Error Shake Animation */
+    .shake {
+      animation: shake 0.4s ease-in-out;
+    }
+  </style>
+</head>
+<body>
+  <div class="app-container">
+    <div class="login-container">
+      <div class="form-card login-card" id="login-card">
+        <div class="login-logo">🔑</div>
+        <div class="login-header">
+          <h2>Admin Dashboard</h2>
+          <p>Sign in to view recruitment submissions</p>
+        </div>
+
+        <form id="login-form" novalidate>
+          <div class="form-group" id="group-username">
+            <label class="form-label" for="username">Username</label>
+            <input type="text" id="username" class="form-input" placeholder="Enter username" required autocomplete="username">
+            <div class="error-message" id="username-error">Username is required</div>
+          </div>
+
+          <div class="form-group" id="group-password">
+            <label class="form-label" for="password">Password</label>
+            <input type="password" id="password" class="form-input" placeholder="Enter password" required autocomplete="current-password">
+            <div class="error-message" id="password-error">Password is required</div>
+          </div>
+
+          <button type="submit" class="btn btn-primary" style="width: 100%; margin-top: 1.5rem;">
+            <span class="btn-text">Sign In</span>
+          </button>
+        </form>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      const form = document.getElementById('login-form');
+      const card = document.getElementById('login-card');
+      const usernameInput = document.getElementById('username');
+      const passwordInput = document.getElementById('password');
+
+      // Clear inline errors on typing
+      [usernameInput, passwordInput].forEach(input => {
+        input.addEventListener('input', () => {
+          input.classList.remove('error');
+          const group = input.closest('.form-group');
+          group.querySelector('.error-message').classList.remove('visible');
+        });
+      });
+
+      form.addEventListener('submit', async (e) => {
+        e.preventDefault();
+        
+        let valid = true;
+        
+        if (!usernameInput.value.trim()) {
+          usernameInput.classList.add('error');
+          document.getElementById('username-error').classList.add('visible');
+          valid = false;
+        }
+        
+        if (!passwordInput.value.trim()) {
+          passwordInput.classList.add('error');
+          document.getElementById('password-error').classList.add('visible');
+          valid = false;
+        }
+
+        if (!valid) {
+          card.classList.add('shake');
+          setTimeout(() => card.classList.remove('shake'), 400);
+          return;
+        }
+
+        const btn = form.querySelector('.btn');
+        btn.classList.add('btn-loading');
+        btn.disabled = true;
+
+        try {
+          const res = await fetch('/api/admin/login', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({
+              username: usernameInput.value,
+              password: passwordInput.value
+            })
+          });
+
+          const data = await res.json();
+
+          if (res.ok && data.success) {
+            window.location.href = '/admin';
+          } else {
+            showToastError(data.error || 'Invalid credentials');
+            card.classList.add('shake');
+            setTimeout(() => card.classList.remove('shake'), 400);
+            passwordInput.value = '';
+            btn.classList.remove('btn-loading');
+            btn.disabled = false;
+          }
+        } catch (err) {
+          showToastError('Network error. Please try again.');
+          btn.classList.remove('btn-loading');
+          btn.disabled = false;
+        }
+      });
+
+      function showToastError(msg) {
+        const toast = document.createElement('div');
+        toast.style.cssText = `
+          position: fixed; bottom: 2rem; left: 50%; transform: translateX(-50%);
+          background: rgba(239, 68, 68, 0.15); border: 1px solid rgba(239, 68, 68, 0.3);
+          color: #fca5a5; padding: 0.8rem 1.5rem; border-radius: 12px;
+          font-size: 0.88rem; z-index: 1000; backdrop-filter: blur(10px);
+        `;
+        toast.innerHTML = `<span>⚠️</span> ${msg}`;
+        document.body.appendChild(toast);
+        setTimeout(() => {
+          toast.style.opacity = '0';
+          toast.style.transition = 'opacity 0.3s';
+          setTimeout(() => toast.remove(), 300);
+        }, 3000);
+      }
+    });
+  </script>
+</body>
+</html>
