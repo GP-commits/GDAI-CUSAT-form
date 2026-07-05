@@ -60,7 +60,17 @@ const loginLimiter = rateLimit({
 app.use(express.static(path.join(__dirname, 'public')));
 
 // --- Initialize Database ---
-const db = getDb();
+let db;
+try {
+  db = getDb();
+} catch (err) {
+  console.error("CRITICAL ERROR initializing DB:", err);
+}
+
+// Add a diagnostic route for Vercel
+app.get('/api/health', (req, res) => {
+  res.json({ status: 'ok', db_initialized: !!db });
+});
 
 // Hash admin password on startup
 const ADMIN_USERNAME = process.env.ADMIN_USERNAME || 'admin';
