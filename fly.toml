@@ -1,0 +1,24 @@
+# fly.toml app configuration file generated for gdai-cusat-recruitment
+
+app = "gdai-form-backend" # You might need to change this if the name is taken
+primary_region = "iad"    # Choose a region close to you (e.g., 'sin' for Singapore, 'bom' for Mumbai)
+
+[build]
+  dockerfile = "Dockerfile"
+
+[env]
+  PORT = "3000"
+  NODE_ENV = "production"
+  # You should set SESSION_SECRET, ADMIN_USERNAME, and ADMIN_PASSWORD via fly secrets later!
+
+[mounts]
+  source = "sqlite_data"
+  destination = "/app/data"
+
+[http_service]
+  internal_port = 3000
+  force_https = true
+  auto_stop_machines = false   # 🚨 This prevents the app from sleeping!
+  auto_start_machines = true
+  min_machines_running = 1
+  processes = ["app"]

@@ -74,7 +74,7 @@ const ADMIN_PASSWORD_HASH = bcrypt.hashSync(
 // ============================================
 
 // Submit form
-app.post('/api/submit', submitLimiter, (req, res) => {
+app.post('/api/submit', submitLimiter, async (req, res) => {
   try {
     const data = req.body;
 
@@ -87,39 +87,44 @@ app.post('/api/submit', submitLimiter, (req, res) => {
     }
 
     // Check for duplicate email
-    const existing = db.prepare('SELECT id FROM submissions WHERE email = ?').get(data.email);
-    if (existing) {
+    const existingResult = await db.execute({
+      sql: 'SELECT id FROM submissions WHERE email = ?',
+      args: [data.email]
+    });
+    
+    if (existingResult.rows.length > 0) {
       return res.status(409).json({ error: 'An application with this email already exists. Each person may only submit once.' });
     }
 
     // Sanitize strings
     const sanitize = (val) => val ? String(val).trim() : null;
 
-    const stmt = db.prepare(`
-      INSERT INTO submissions (
-        full_name, email, phone, year_of_study, branch,
-        previous_club_experience, portfolio_link, role_applied, role_answers,
-        second_role_choice, anything_else, available_for_interview,
-        ip_address, user_agent
-      ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
-    `);
-
-    stmt.run(
-      sanitize(data.full_name),
-      sanitize(data.email),
-      sanitize(data.phone),
-      sanitize(data.year_of_study),
-      sanitize(data.branch),
-      sanitize(data.previous_club_experience),
-      sanitize(data.portfolio_link),
-      sanitize(data.role_applied),
-      JSON.stringify(data.role_answers || {}),
-      sanitize(data.second_role_choice),
-      sanitize(data.anything_else),
-      sanitize(data.available_for_interview),
-      req.ip,
-      req.get('User-Agent')
-    );
+    await db.execute({
+      sql: `
+        INSERT INTO submissions (
+          full_name, email, phone, year_of_study, branch,
+          previous_club_experience, portfolio_link, role_applied, role_answers,
+          second_role_choice, anything_else, available_for_interview,
+          ip_address, user_agent
+        ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+      `,
+      args: [
+        sanitize(data.full_name),
+        sanitize(data.email),
+        sanitize(data.phone),
+        sanitize(data.year_of_study),
+        sanitize(data.branch),
+        sanitize(data.previous_club_experience),
+        sanitize(data.portfolio_link),
+        sanitize(data.role_applied),
+        JSON.stringify(data.role_answers || {}),
+        sanitize(data.second_role_choice),
+        sanitize(data.anything_else),
+        sanitize(data.available_for_interview),
+        req.ip,
+        req.get('User-Agent')
+      ]
+    });
 
     res.status(201).json({ success: true, message: 'Application submitted successfully!' });
   } catch (err) {
@@ -171,7 +176,7 @@ app.get('/admin/dashboard.html', requireAuth, (req, res) => {
 app.use('/admin', express.static(path.join(__dirname, 'admin')));
 
 // Get all submissions
-app.get('/api/admin/submissions', requireAuth, (req, res) => {
+app.get('/api/admin/submissions', requireAuth, async (req, res) => {
   try {
     const { role, search, sort } = req.query;
     let query = 'SELECT * FROM submissions WHERE 1=1';
@@ -190,7 +195,12 @@ app.get('/api/admin/submissions', requireAuth, (req, res) => {
 
     query += ' ORDER BY created_at ' + (sort === 'oldest' ? 'ASC' : 'DESC');
 
-    const submissions = db.prepare(query).all(...params);
+    const result = await db.execute({
+      sql: query,
+      args: params
+    });
+    
+    const submissions = result.rows;
 
     // Parse role_answers JSON
     submissions.forEach(s => {
@@ -206,10 +216,16 @@ app.get('/api/admin/submissions', requireAuth, (req, res) => {
 });
 
 // Get single submission
-app.get('/api/admin/submissions/:id', requireAuth, (req, res) => {
+app.get('/api/admin/submissions/:id', requireAuth, async (req, res) => {
   try {
-    const submission = db.prepare('SELECT * FROM submissions WHERE id = ?').get(req.params.id);
-    if (!submission) return res.status(404).json({ error: 'Submission not found.' });
+    const result = await db.execute({
+      sql: 'SELECT * FROM submissions WHERE id = ?',
+      args: [req.params.id]
+    });
+    
+    if (result.rows.length === 0) return res.status(404).json({ error: 'Submission not found.' });
+
+    const submission = result.rows[0];
 
     try { submission.role_answers = JSON.parse(submission.role_answers); }
     catch { submission.role_answers = {}; }
@@ -221,10 +237,14 @@ app.get('/api/admin/submissions/:id', requireAuth, (req, res) => {
 });
 
 // Delete submission
-app.delete('/api/admin/submissions/:id', requireAuth, (req, res) => {
+app.delete('/api/admin/submissions/:id', requireAuth, async (req, res) => {
   try {
-    const result = db.prepare('DELETE FROM submissions WHERE id = ?').run(req.params.id);
-    if (result.changes === 0) return res.status(404).json({ error: 'Submission not found.' });
+    const result = await db.execute({
+      sql: 'DELETE FROM submissions WHERE id = ?',
+      args: [req.params.id]
+    });
+    
+    if (result.rowsAffected === 0) return res.status(404).json({ error: 'Submission not found.' });
     res.json({ success: true });
   } catch (err) {
     res.status(500).json({ error: 'Failed to delete submission.' });
@@ -232,18 +252,25 @@ app.delete('/api/admin/submissions/:id', requireAuth, (req, res) => {
 });
 
 // Stats
-app.get('/api/admin/stats', requireAuth, (req, res) => {
+app.get('/api/admin/stats', requireAuth, async (req, res) => {
   try {
-    const total = db.prepare('SELECT COUNT(*) as count FROM submissions').get().count;
-    const byRole = db.prepare('SELECT role_applied, COUNT(*) as count FROM submissions GROUP BY role_applied ORDER BY count DESC').all();
-    const byYear = db.prepare('SELECT year_of_study, COUNT(*) as count FROM submissions GROUP BY year_of_study ORDER BY count DESC').all();
-    const latest = db.prepare('SELECT created_at FROM submissions ORDER BY created_at DESC LIMIT 1').get();
+    const totalResult = await db.execute('SELECT COUNT(*) as count FROM submissions');
+    const total = totalResult.rows[0].count;
+    
+    const byRoleResult = await db.execute('SELECT role_applied, COUNT(*) as count FROM submissions GROUP BY role_applied ORDER BY count DESC');
+    const byRole = byRoleResult.rows;
+    
+    const byYearResult = await db.execute('SELECT year_of_study, COUNT(*) as count FROM submissions GROUP BY year_of_study ORDER BY count DESC');
+    const byYear = byYearResult.rows;
+    
+    const latestResult = await db.execute('SELECT created_at FROM submissions ORDER BY created_at DESC LIMIT 1');
+    const latest = latestResult.rows.length > 0 ? latestResult.rows[0].created_at : null;
 
     res.json({
       total,
       byRole,
       byYear,
-      latestSubmission: latest ? latest.created_at : null,
+      latestSubmission: latest,
     });
   } catch (err) {
     res.status(500).json({ error: 'Failed to fetch stats.' });
@@ -251,9 +278,10 @@ app.get('/api/admin/stats', requireAuth, (req, res) => {
 });
 
 // CSV Export
-app.get('/api/admin/export/csv', requireAuth, (req, res) => {
+app.get('/api/admin/export/csv', requireAuth, async (req, res) => {
   try {
-    const submissions = db.prepare('SELECT * FROM submissions ORDER BY created_at DESC').all();
+    const result = await db.execute('SELECT * FROM submissions ORDER BY created_at DESC');
+    const submissions = result.rows;
 
     // CSV Header
     const headers = [
@@ -296,10 +324,15 @@ app.get('/admin/login', (req, res) => {
   res.sendFile(path.join(__dirname, 'admin', 'login.html'));
 });
 
-// --- Start Server ---
-app.listen(PORT, () => {
-  console.log(`\n🎮 GDAI CUSAT Recruitment Server`);
-  console.log(`   Form:      http://localhost:${PORT}`);
-  console.log(`   Admin:     http://localhost:${PORT}/admin/login`);
-  console.log(`   Port:      ${PORT}\n`);
-});
+// --- Start Server (Only when run locally, not on Vercel) ---
+if (process.env.NODE_ENV !== 'production' && require.main === module) {
+  app.listen(PORT, () => {
+    console.log(`\n🎮 GDAI CUSAT Recruitment Server`);
+    console.log(`   Form:      http://localhost:${PORT}`);
+    console.log(`   Admin:     http://localhost:${PORT}/admin/login`);
+    console.log(`   Port:      ${PORT}\n`);
+  });
+}
+
+// Export the app for Vercel Serverless Functions
+module.exports = app;
